@@ -921,6 +921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 879211764}
   - component: {fileID: 879211763}
+  - component: {fileID: 879211765}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -955,6 +956,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &879211765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879211762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f08a51602734bb4692aeda8e0067e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstCard: {fileID: 0}
+  secondCard: {fileID: 0}
+  cardCount: 0
 --- !u!1 &1016543562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1533,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bfdf8a1d0a49742b8148bf29b3c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamMembers:
+  - Yejin
+  - YongMin
+  - Younga
+  - Pht
+  - Youngsik
   card: {fileID: 8962019279597602134, guid: f7775c396014eb5419b9c2e6ae0ca304, type: 3}
 --- !u!1 &1628827052
 GameObject:

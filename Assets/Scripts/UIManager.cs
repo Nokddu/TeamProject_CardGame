@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public Text GameEndTxt; // 게임이 끝났을때 이긴건지 목숨이 다 된건지 혹은 시간이 다 된건지 보여주는 텍스트
     public GameObject EndPanel; // 게임이 끝나면 나오는 판넬
 
-    private float time = 5f;
+    private float time = 30f;
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
