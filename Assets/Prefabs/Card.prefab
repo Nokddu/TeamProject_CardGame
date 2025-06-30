@@ -126,7 +126,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9178305868621688294}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: OpenCard
+        m_MethodName: BeforeCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -467,6 +467,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f29a81ba4d3b14e93177adfa64ab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamMembers:
+  - Yejin
+  - YongMin
+  - Younga
+  - Pht
+  - Youngsik
+  nameIndex: ' '
   idx: 0
   front: {fileID: 1052758616061654610}
   back: {fileID: 6447960653444024007}
