@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void isMatched()
     {
-        if(firstCard.idx == secondCard.idx)
+        if(firstCard.nameIndex == secondCard.nameIndex)
         {
             firstCard.DestroyCard();
             secondCard.DestroyCard();

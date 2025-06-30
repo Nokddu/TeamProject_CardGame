@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+    public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Pht", "Youngsik"};
+
+    public string nameIndex = " ";
     public int idx = 0;
 
     public GameObject front;
@@ -26,7 +29,13 @@ public class Card : MonoBehaviour
     public void Setting(int number)
     {
         idx = number;
-        frontImage.sprite = Resources.Load<Sprite>($"rtan{idx}");
+        string imageFile = teamMembers[idx/3] + "_" + (idx%3+1);
+        //이름 + "_" + 번호 //이름: idx/3 몫 //번호: idx%3 나머지 +1
+        Debug.Log(imageFile);
+
+        //frontImage.sprite = Resources.Load<Sprite>($"rtan{idx}");
+        frontImage.sprite = Resources.Load<Sprite>(imageFile);       
+
     }
 
     public void OpenCard()
