@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Board : MonoBehaviour
 {
-    public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Pht", "Youngsik"};
+    public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Yongjin", "Youngsik"};
 
 
     Transform cards;
@@ -15,23 +15,22 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int numOfPair = 8; //8이랑 10으로 넣었을 때 화면에 딱 맞음.
+        int numOfPair = 8; //확장성 고려: 8이랑 10으로 넣었을 때 화면에 딱 맞음.
         List<int> cardIds = new List<int>();
 
-        //한명씩 제일 첫 이미지 넣어줌.
+        //각 멤버들의 1번 이미지를 1 Pair 넣어줌.
         for (int i = 0; i < teamMembers.Count; i++)
         {
-            //각 멤버들의 1번 이미지를 넣어줌.
             cardIds.Add(i*3);
             cardIds.Add(i*3);
         }
     
-
-//        Random random = new Random();
+        //cardIds의 갯수가 필요한 카드 갯수에 도달할때까지 반복
         while(cardIds.Count < numOfPair * 2)
         {
-            int randomNumber = Random.Range(0,teamMembers.Count*3);
+            int randomNumber = Random.Range(0, teamMembers.Count * 3); //멤버마다 이미지 3장
             
+            //중복 체크 후 Add
             if(!cardIds.Contains(randomNumber))
             {
                 cardIds.Add(randomNumber);
@@ -56,17 +55,6 @@ public class Board : MonoBehaviour
             go.transform.position = new Vector2(x, y);
             go.GetComponent<Card>().Setting(cardIds[i]);
         }
-
-        // for (int i = 0; i < 16; i++)
-        // {
-        //     GameObject go = Instantiate(card, this.transform);
-
-        //     float x = (i / 4) * 1.4f - 2.1f;
-        //     float y = (i % 4) * 1.4f - 3.0f;
-
-        //     go.transform.position = new Vector2(x, y);
-        //     go.GetComponent<Card>().Setting(cardIds[i]);
-        // }
     }
     // Update is called once per frame
     void Update()
