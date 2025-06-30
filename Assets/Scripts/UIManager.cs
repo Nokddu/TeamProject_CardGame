@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject EndPanel; // 게임이 끝나면 나오는 판넬
 
     private float time = 30f;
+    private float Timer = 0f;
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
@@ -21,9 +22,14 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         time -= Time.deltaTime;
-
+        Timer += Time.deltaTime;
+        float t = Mathf.Clamp01(Timer / time);
+        float whitetored = Mathf.Lerp(1f, 0f, t);
+        Timetxt.color = new Color(1f, whitetored, whitetored);
         Timetxt.text = time.ToString("N1");
         ClearTime.text = time.ToString("N1");
+
+
 
         End();
     }
