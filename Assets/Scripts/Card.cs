@@ -6,6 +6,7 @@ public class Card : MonoBehaviour
 {
     public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Yongjin", "Youngsik"};
 
+    public string nameIndex = " ";
     public int idx = 0;
 
     public GameObject front;
@@ -70,5 +71,9 @@ public class Card : MonoBehaviour
         front.SetActive(false);
         back.SetActive(true);
     }
-
+    public void BeforeCheck()
+    {
+        if (GameManager.instance.allOpen) return;
+        OpenCard();
+    }
 }
