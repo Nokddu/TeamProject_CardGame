@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int numOfPair = 8;
+        int numOfPair = 8; //8이랑 10으로 넣었을 때 화면에 딱 맞음.
         List<int> cardIds = new List<int>();
 
         //한명씩 제일 첫 이미지 넣어줌.
@@ -46,16 +46,27 @@ public class Board : MonoBehaviour
 
         cardIds = cardIds.OrderBy(x => Random.value).ToList();
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < numOfPair*2; i++)
         {
             GameObject go = Instantiate(card, this.transform);
 
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.0f;
+            float x = (i / (numOfPair/2)) * 1.4f - 2.1f;
+            float y = (i % (numOfPair/2)) * 1.4f - 3.0f;
 
             go.transform.position = new Vector2(x, y);
             go.GetComponent<Card>().Setting(cardIds[i]);
         }
+
+        // for (int i = 0; i < 16; i++)
+        // {
+        //     GameObject go = Instantiate(card, this.transform);
+
+        //     float x = (i / 4) * 1.4f - 2.1f;
+        //     float y = (i % 4) * 1.4f - 3.0f;
+
+        //     go.transform.position = new Vector2(x, y);
+        //     go.GetComponent<Card>().Setting(cardIds[i]);
+        // }
     }
     // Update is called once per frame
     void Update()
