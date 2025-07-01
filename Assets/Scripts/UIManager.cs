@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
-    public Text Timetxt; // À§¿¡ ³ª¿À´Â ½Ã°£
-    public Text ClearTime; // Å¬¸®¾î½Ã ³²Àº ½Ã°£
-    public Text GameEndTxt; // °ÔÀÓÀÌ ³¡³µÀ»¶§ ÀÌ±ä°ÇÁö ¸ñ¼ûÀÌ ´Ù µÈ°ÇÁö È¤Àº ½Ã°£ÀÌ ´Ù µÈ°ÇÁö º¸¿©ÁÖ´Â ÅØ½ºÆ®
-    public GameObject EndPanel; // °ÔÀÓÀÌ ³¡³ª¸é ³ª¿À´Â ÆÇ³Ú
+    public Text Timetxt; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    public Text ClearTime; // Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    public Text GameEndTxt; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½È°ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½È°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ø½ï¿½Æ®
+    public GameObject EndPanel; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½
 
     private float time = 30f;
     private float Timer = 0f;
@@ -43,18 +43,18 @@ public class UIManager : MonoBehaviour
     //            Time.timeScale = 0;
     //            EndPanel.SetActive(true);
     //            GameEndTxt.gameObject.SetActive(true);
-    //            GameEndTxt.text = "½Ã°£ÀÌ ´Ù µÇ¾ú½À´Ï´Ù!!\n\n´Ù½Ã µµÀü?"; 
+    //            GameEndTxt.text = "ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!\n\nï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½?"; 
 
     //       
 
     //    }
     //}
-    //    (³²Àº »ý¸í < 1ÀÌÇÏ¸é)
+    //    (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ < 1ï¿½ï¿½ï¿½Ï¸ï¿½)
     //       
     //            Time.timeScale = 0;
     //          EndPanel.SetActive(true);
     //          GameEndTxt.gameObject.SetActive(true);
-    //         GameEndTxt.text = "\n±âÈ¸¸¦ ÀüºÎ ¼ÒÁøÇÏ¿´½À´Ï´Ù ¤Ð^¤Ð";   // °ÔÀÓ ¸Å´ÏÀú¿¡¼­ ¶óÀÌÇÁ °ü¸®ÇÏ´Â º¯¼ö¸¦ °¡Áö°í ¿Í¾ßµÊ
+    //         GameEndTxt.text = "\nï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½^ï¿½ï¿½";   // ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Í¾ßµï¿½
 
     public void Retry()
     {
