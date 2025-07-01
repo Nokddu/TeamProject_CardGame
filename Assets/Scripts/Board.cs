@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Board : MonoBehaviour
 {
-    public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Yongjin", "Youngsik"};
+    public List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
 
 
     Transform cards;

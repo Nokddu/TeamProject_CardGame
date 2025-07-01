@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Yongjin", "Youngsik"};
+    List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
 
     public string nameIndex = " ";
     public int idx = 0;
