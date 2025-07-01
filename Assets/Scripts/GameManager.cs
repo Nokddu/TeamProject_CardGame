@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,23 +43,30 @@ public class GameManager : MonoBehaviour
             cardCount -= 2;
 
             Invoke(nameof(EnableClick), 1.0f);
-        }
-        else
-        {
-            firstCard.CloseCard();
-            secondCard.CloseCard();
 
-            Invoke(nameof(EnableClick), 1.0f);
-        }
+
+            }
+            else
+            {
+                firstCard.CloseCard();
+                secondCard.CloseCard();
+
+                Invoke(nameof(EnableClick), 1.0f);
+
+            }
+
 
         firstCard = null;
-        secondCard = null;
+            secondCard = null;
 
-        allOpen = true;
+            allOpen = true;
+
+
+
+            void EnableClick()
+            {
+                allOpen = false;
+            }
+        }
     }
-    void EnableClick()
-    {
-        allOpen = false;
-    }
-}
 
