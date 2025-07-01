@@ -45,28 +45,29 @@ public class GameManager : MonoBehaviour
             Invoke(nameof(EnableClick), 1.0f);
 
 
-            }
-            else
-            {
-                firstCard.CloseCard();
-                secondCard.CloseCard();
+        }
+        else
+        {
+            firstCard.CloseCard();
+            secondCard.CloseCard();
 
-                Invoke(nameof(EnableClick), 1.0f);
+            Invoke(nameof(EnableClick), 1.0f);
 
-            }
+        }
 
 
         firstCard = null;
-            secondCard = null;
+        secondCard = null;
 
-            allOpen = true;
+        allOpen = true;
 
 
 
-            void EnableClick()
-            {
-                allOpen = false;
-            }
-        }
     }
+
+    void EnableClick()
+    {
+        allOpen = false;
+    }
+}
 
