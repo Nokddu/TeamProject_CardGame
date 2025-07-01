@@ -5,18 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
-    public Text Timetxt; // À§¿¡ ³ª¿À´Â ½Ã°£
-    public Text ClearTime; // Å¬¸®¾î½Ã ³²Àº ½Ã°£
-    public Text GameEndTxt; // °ÔÀÓÀÌ ³¡³µÀ»¶§ ÀÌ±ä°ÇÁö ¸ñ¼ûÀÌ ´Ù µÈ°ÇÁö È¤Àº ½Ã°£ÀÌ ´Ù µÈ°ÇÁö º¸¿©ÁÖ´Â ÅØ½ºÆ®
-    public GameObject EndPanel; // °ÔÀÓÀÌ ³¡³ª¸é ³ª¿À´Â ÆÇ³Ú
-
+    public static UIManager uiInstance;//ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì‚¬ìš©í•˜ê¸°ìœ„í•¨
+    public Text Timetxt; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    public GameObject normalClearEnd; //ë…¸ë§ê²Œì„ ì„±ê³µì‹œ ë‚˜ì˜¤ëŠ” ì‚¬ì§„ê³¼ ê¸€
+    public GameObject normalFailEnd;//ë…¸ë§ê²Œì„ ì‹¤íŒ¨ì‹œ ë‚˜ì˜¤ëŠ” ì‚¬ì§„ê³¼ ê¸€
+    public GameObject timerGameEnd;//ì‹œê°„ ì œí•œëª¨ë“œ ê²Œì„ ì¢…ë£Œì‹œ ë‚˜ì˜¤ëŠ” ê¸€
+    public GameObject EndPanel; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½
     private float time = 30f;
     private float Timer = 0f;
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
-        ClearTime.gameObject.GetComponent<Text>();
-        GameEndTxt.gameObject.GetComponent<Text>();
+        uiInstance = this;
     }
 
     // Update is called once per frame
@@ -28,42 +28,54 @@ public class UIManager : MonoBehaviour
         float whitetored = Mathf.Lerp(1f, 0f, t);
         Timetxt.color = new Color(1f, whitetored, whitetored);
         Timetxt.text = time.ToString("N1");
-        ClearTime.text = time.ToString("N1");
 
 
 
-        //if(time < 0f)
-        //{
-        //    End();
-        //}
+        if(time < 0f)
+        {
+           End();
+        }
     }
 
-    //    void End()
-    //    {
-    //            Time.timeScale = 0;
-    //            EndPanel.SetActive(true);
-    //            GameEndTxt.gameObject.SetActive(true);
-    //            GameEndTxt.text = "½Ã°£ÀÌ ´Ù µÇ¾ú½À´Ï´Ù!!\n\n´Ù½Ã µµÀü?"; 
-
-    //       
-
-    //    }
-    //}
-    //    (³²Àº »ı¸í < 1ÀÌÇÏ¸é)
+    public void End()
+    {
+        Time.timeScale = 0;
+        EndPanel.SetActive(true);
+        if (GameManager.gameType == "Normal") //ê²Œì„íƒ€ì…ì´ ì¼ë°˜ê²Œì„ì¸ê²½ìš°
+        {
+            if (time > 0)
+            {
+                normalClearEnd.gameObject.SetActive(true);
+            }
+            else
+            {
+                normalFailEnd.gameObject.SetActive(true);
+            }
+        }
+        else //ê²Œì„íƒ€ì…ì´ ì‹œê°„ì œí•œëª¨ë“œì¸ê²½ìš°(êµ¬í˜„ì˜ˆì •)
+        {
+            
+        }
+       }
+    //    (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ < 1ï¿½ï¿½ï¿½Ï¸ï¿½)
     //       
     //            Time.timeScale = 0;
     //          EndPanel.SetActive(true);
     //          GameEndTxt.gameObject.SetActive(true);
-    //         GameEndTxt.text = "\n±âÈ¸¸¦ ÀüºÎ ¼ÒÁøÇÏ¿´½À´Ï´Ù ¤Ğ^¤Ğ";   // °ÔÀÓ ¸Å´ÏÀú¿¡¼­ ¶óÀÌÇÁ °ü¸®ÇÏ´Â º¯¼ö¸¦ °¡Áö°í ¿Í¾ßµÊ
+    //         GameEndTxt.text = "\nï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½^ï¿½ï¿½";   // ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Í¾ßµï¿½
 
     public void Retry()
     {
         SceneManager.LoadScene("MainScene");
     }
-
-    public void EndButton()
+    public void MoveTitle()
     {
-        SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene("TitleScene");
+    }
+    public void EndButton() //ì‹¤ì œë¡œëŠ” ê²Œì„ ì¢…ë£Œë˜ì§€ë§Œ í™”ë©´ìƒì—ëŠ” ì•ˆêº¼ì§
+    {
+        Debug.Log("ê²Œì„ ì¢…ë£Œ");
+        Application.Quit();
     }
 }
 
