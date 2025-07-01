@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
             Invoke(nameof(EnableClick), 1.0f);
             if(firstCard.idx == 0 && secondCard.idx == 0)
             {
-                UIManager ui = GetComponent<UIManager>();
-                ui.GetComponent<UIManager>().time -= 1f;
+                UIManager ui = GameObject.Find("UIManager").GetComponent<UIManager>();
+                ui.time -= 1f;
                 Debug.Log("시간이" + ui.time + "만큼 남았어요");
             }
 
