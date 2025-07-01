@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject timerGameEnd;//시간 제한모드 게임 종료시 나오는 글
     public GameObject EndPanel; // ������ ������ ������ �ǳ�
 
-    private float time = 4f;
+    public float time = 30f;
     private float Timer = 0f;
     void Start()
     {
@@ -53,10 +53,10 @@ public class UIManager : MonoBehaviour
                 normalFailEnd.gameObject.SetActive(true);
             }
         }
-        else //게임타입이 시간제한모드인경우(구현예정)
-        {
+        //else //게임타입이 시간제한모드인경우(구현예정)
+        //{
             
-        }
+        //}
        }
     //}
     //    (���� ���� < 1���ϸ�)

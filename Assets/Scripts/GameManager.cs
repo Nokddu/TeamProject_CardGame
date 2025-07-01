@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
             cardCount -= 2;
 
             Invoke(nameof(EnableClick), 1.0f);
+            if(firstCard.idx == 0 && secondCard.idx == 0)
+            {
+                UIManager ui = GetComponent<UIManager>();
+                ui.GetComponent<UIManager>().time -= 1f;
+                Debug.Log("시간이" + ui.time + "만큼 남았어요");
+            }
 
             if (cardCount == -16)
             { // 카드를 모두 찾을시
