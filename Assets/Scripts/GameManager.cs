@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
             Invoke(nameof(EnableClick), 1.0f);
 
-            if (cardCount == 0)
+            if (cardCount == -16)
             { // 카드를 모두 찾을시
                 Time.timeScale = 0.0f;
                 Invoke("EndButton", 1.0f);
