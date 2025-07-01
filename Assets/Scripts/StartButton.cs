@@ -10,6 +10,9 @@ public class StartButton : MonoBehaviour
     public GameObject Play; // 음악 켠 상태의 아이콘
     public GameObject Pause; // 음악 멈춘 상태의 아이콘
 
+    public GameObject TitlePanel; //titleScene 기본 UI
+    public GameObject CollectionPanel; // 컬렉션 패널 UI
+
     private void Start()
     {
         bgmToggle.onValueChanged.AddListener(BgmisOn); // 함수랑 연결
@@ -53,8 +56,14 @@ public class StartButton : MonoBehaviour
 
     public void CollectionBtn() // 컬렉션 UI 버튼
     {
-        // 컬렉션 씬 열리게
-        //.SetActive(true);
+        TitlePanel.SetActive(false);
+        CollectionPanel.SetActive(true);
+    }
+    
+    public void BackFromCollectionBtn() // 컬렉션에서 뒤로가기 버튼
+    {
+        TitlePanel.SetActive(true);
+        CollectionPanel.SetActive(false);
     }
 
     public void ExitBtn() // 게임 종료 버튼
