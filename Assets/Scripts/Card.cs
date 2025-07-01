@@ -34,6 +34,10 @@ public class Card : MonoBehaviour
         Debug.Log(imageFile);
         
         frontImage.sprite = Resources.Load<Sprite>(imageFile);
+        if(idx == 0)
+        {
+            frontImage.sprite = Resources.Load<Sprite>("bomb");
+        }
     }
 
     public void OpenCard()
