@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2180988}
   - component: {fileID: 2180989}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: BgmToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,19 +207,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 291699142}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
-        m_MethodName: BgmisOn
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
 --- !u!1 &179809941
 GameObject:
@@ -346,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmToggle: {fileID: 2180989}
+  TimeMod: {fileID: 452535249}
   Play: {fileID: 292586053}
   Pause: {fileID: 663524022}
 --- !u!4 &291699143
@@ -1992,7 +1981,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 852976031}
+  - {fileID: 772954679}
+  - {fileID: 291699143}
   - {fileID: 1261325273}
   - {fileID: 1214958838}
-  - {fileID: 291699143}
-  - {fileID: 772954679}
