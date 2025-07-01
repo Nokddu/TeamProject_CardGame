@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    public static string gameType = "Normal";
     public Card firstCard;
     public Card secondCard;
     public bool allOpen = false;
@@ -46,8 +46,7 @@ public class GameManager : MonoBehaviour
 
             if (cardCount == -16)
             { // 카드를 모두 찾을시
-                Time.timeScale = 0.0f;
-                Invoke("EndButton", 1.0f);
+                UIManager.uiInstance.End();
             }
 
         }

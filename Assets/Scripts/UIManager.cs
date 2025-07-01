@@ -5,18 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
+    public static UIManager uiInstance;//다른 스크립트에서 사용하기위함
     public Text Timetxt; // ���� ������ �ð�
     public GameObject normalClearEnd; //노말게임 성공시 나오는 사진과 글
     public GameObject normalFailEnd;//노말게임 실패시 나오는 사진과 글
     public GameObject timerGameEnd;//시간 제한모드 게임 종료시 나오는 글
     public GameObject EndPanel; // ������ ������ ������ �ǳ�
-    public string gameType = "Normal"; //타입 확인변수(나중에 게임매니저로 갈예정)
 
-    private float time = 30f;
+    private float time = 4f;
     private float Timer = 0f;
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
+        uiInstance = this;
     }
 
     // Update is called once per frame
@@ -37,11 +38,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-       void End()
-       {
+    public void End()
+    {
         Time.timeScale = 0;
         EndPanel.SetActive(true);
-        if (gameType == "Normal")
+        if (GameManager.gameType == "Normal") //게임타입이 일반게임인경우
         {
             if (time > 0)
             {
@@ -51,6 +52,10 @@ public class UIManager : MonoBehaviour
             {
                 normalFailEnd.gameObject.SetActive(true);
             }
+        }
+        else //게임타입이 시간제한모드인경우(구현예정)
+        {
+            
         }
        }
     //}
