@@ -15,9 +15,18 @@ public class StartButton : MonoBehaviour
 
     private void Start()
     {
-        bgmToggle.onValueChanged.AddListener(BgmisOn); // 함수랑 연결
+        Invoke("Init", 0.1f);
+    }
+    private void Init()
+    {
+        if (AudioManager.Instance == null || AudioManager.Instance.audioSource == null)
+        {
+            Invoke("Init", 0.1f); // 계속 기다림
+            return;
+        }
 
-        BgmisOn(bgmToggle.isOn); // 시작할 때 브금 실행되게
+        bgmToggle.onValueChanged.AddListener(BgmisOn);
+        BgmisOn(bgmToggle.isOn);
     }
 
     public void BgmisOn(bool isOn) // 토글 상태 체크
