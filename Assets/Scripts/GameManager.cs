@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // 싱글톤
-
+    
     public static string gameType = "Normal";
     public Card firstCard; 
     public Card secondCard;
     public bool allOpen = false;
     public int cardCount = 0;
-    public MemberInfoPanel infoPanel;
 
     public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
     public int BestScore { get; private set; }
+
+    public static List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
+
+    private Text clearMsg;
+    private Image clearImage;
+
+
     //State 패턴
     public enum TimedOrScore
     {
@@ -40,7 +47,10 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-        else Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
+        else
+        {
+            Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
+        }
     }
 
 
@@ -53,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(TimeSet);
+        //Debug.Log(TimeSet);
         if(TimeSet < 0f)
         {
             GameEnd();
@@ -180,13 +190,56 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) //Scene로드 되었을 때 실행
+    {
+        if (scene.name == "MainScene")
+        {
+            SetupMainSceneUI();
+        }
+    }
+
+    private void SetupMainSceneUI() //MainScene에만 있는 오브젝트 참조용.
+    {
+        GameObject textObject = GameObject.Find("ClearMsg");
+        if (textObject != null)
+        {
+            clearMsg = textObject.GetComponent<Text>();
+        }
+        else
+        {
+            Debug.Log("ClearMsg못찾음");
+        }
+
+        GameObject imageObject = GameObject.Find("ClearImage");
+        if(imageObject != null)
+        {
+            clearImage = imageObject.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("ClearImage못찾음");
+        }
+    }
+
     void CollectMember()    //멤버 수집 (중복제외) 수집된 멤버는 List에서 제거하는 방식으로 중복 방지함.
     {
-        int index = Random.Range(0, teamMembers.Count);
-        string memberName = teamMembers[index];
-        teamMembers.RemoveAt(index);
-        infoPanel.CollectOne(memberName);
-        Debug.Log("CollectMember called");
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            int index = Random.Range(0, teamMembers.Count);
+            string memberName = teamMembers[index];
+            teamMembers.RemoveAt(index);
+            collectedCards.Add(memberName);
+
+            if (clearMsg == null || clearImage == null)
+            {
+                Debug.LogWarning("CollectMember(): UI가 아직 설정되지 않았습니다.");
+                SetupMainSceneUI();
+            }
+
+            clearMsg.text = memberName + "을 획득했다!";
+            clearImage.sprite = Resources.Load<Sprite>(memberName + "_" + 1);
+            Debug.Log("CollectMember called");
+        }
     }
 }
 

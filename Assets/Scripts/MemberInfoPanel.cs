@@ -9,9 +9,7 @@ public class MemberInfoPanel : MonoBehaviour
 
     List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
     List<string> memberDescriptions = new List<string> {"안녕하세요 /예진", "안녕하세요/용민", "안녕하세요 /영아", "안녕하세요 /영식"};
-    List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
-
-
+    
     public Text nameText;
     public Text descriptionText;
     public SpriteRenderer memberImage1;
@@ -22,7 +20,12 @@ public class MemberInfoPanel : MonoBehaviour
 
     public void UpdateInfo(int idx)
     {
-        if (collectedCards.Contains(teamMembers[idx]))
+        Debug.Log("From UpdateInfo");
+        foreach (var member in GameManager.collectedCards)
+        {
+            Debug.Log(member);
+        }
+        if (GameManager.collectedCards.Contains(teamMembers[idx]))
         {
             selectedMemberId = idx;
             nameText.text = teamMembers[idx];
@@ -59,11 +62,15 @@ public class MemberInfoPanel : MonoBehaviour
     public void CollectOne(string memberName)
     {
         //모든 카드가 콜렉트 된 상태가 아닐 경우에만
-        if (!(collectedCards.Count == teamMembers.Count))
+        if (GameManager.collectedCards.Count == teamMembers.Count)
         {
-            collectedCards.Add(memberName);
+
+        }
+        else
+        {
+            GameManager.collectedCards.Add(memberName);
             Debug.Log(memberName);
-            foreach (string name in collectedCards)
+            foreach (string name in GameManager.collectedCards)
             {
                 Debug.Log(name);
             }
