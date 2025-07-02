@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // 싱글톤
 
-    public static string gameType = "Normal";
     public Card firstCard; 
     public Card secondCard;
     public bool allOpen = false;
@@ -23,7 +22,7 @@ public class GameManager : MonoBehaviour
         Timed, // 시간안에 다 맞추는 모드 . 아마 Default라고 생각
         Score // TimeSet 안에 최대한 많이 뒤집는 모드
     }
-    private TimedOrScore _state = TimedOrScore.Timed;
+    public TimedOrScore _state = TimedOrScore.Timed;
 
     List<string> teamMembers = new List<string> { "Yejin", "YongMin", "Younga", "Youngsik" };
     
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(TimeSet);
+        // Debug.Log(TimeSet);
         if(TimeSet < 0f)
         {
             GameEnd();

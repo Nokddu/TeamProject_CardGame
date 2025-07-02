@@ -12,11 +12,16 @@ public class UIManager : MonoBehaviour
     public GameObject normalFailEnd;//노말게임 실패시 나오는 사진과 글
     public GameObject timerGameEnd;//시간 제한모드 게임 종료시 나오는 글
     public GameObject EndPanel; // ������ ������ ������ �ǳ�
+
     private float Timer = 0f;
+    
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
         uiInstance = this;
+        normalClearEnd.gameObject.SetActive(false);
+        normalFailEnd.gameObject.SetActive(false);
+        timerGameEnd.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,7 +45,7 @@ public class UIManager : MonoBehaviour
     public void End()
     {
         EndPanel.SetActive(true);
-        if (GameManager.gameType == "Normal") //게임타입이 일반게임인경우
+        if ( GameManager.instance._state == GameManager.TimedOrScore.Timed) //게임타입이 일반게임인경우
         {
             if (GameManager.instance.TimeSet > 0)
             {
@@ -51,11 +56,11 @@ public class UIManager : MonoBehaviour
                 normalFailEnd.gameObject.SetActive(true);
             }
         }
-        else //게임타입이 시간제한모드인경우(구현예정)
+        else //게임타입이 시간제한모드인경우
         {
-            
+            timerGameEnd.gameObject.SetActive(true);
         }
-       }
+    }
 
 
     public void Retry() // 다시 시작 버튼 
@@ -65,7 +70,6 @@ public class UIManager : MonoBehaviour
     public void MoveTitle()
     {
         GameManager.instance.GoTitle(); // 타이틀 씬 이동
-        Debug.Log("d");
     }
     public void EndButton() //실제로는 게임 종료되지만 화면상에는 안꺼짐
     {

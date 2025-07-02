@@ -1720,6 +1720,7 @@ MonoBehaviour:
   allOpen: 0
   cardCount: 0
   infoPanel: {fileID: 0}
+  _state: 0
 --- !u!4 &1823051785
 Transform:
   m_ObjectHideFlags: 0
