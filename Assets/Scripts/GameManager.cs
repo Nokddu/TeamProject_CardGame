@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(TimeSet);
-
         if(TimeSet < 0f)
         {
             GameEnd();
@@ -101,7 +99,7 @@ public class GameManager : MonoBehaviour
             cardCount -= 2;
 
             Invoke(nameof(EnableClick), 1.0f);
-            if (cardCount == -16)
+            if (cardCount == -14)
             { // 카드를 모두 찾을시
                 Time.timeScale = 0.0f;
                 Invoke("EndButton", 1.0f);
@@ -127,7 +125,15 @@ public class GameManager : MonoBehaviour
 
 
     }
-
+    public void DiscountTime(float seconds)
+    {
+        TimeSet -= seconds;
+        if (TimeSet < 0f)
+        {
+            TimeSet = 0f;
+            UIManager.uiInstance.End(); // 시간이 0이 되면 즉시 게임 종료 처리
+        }
+    }
     void EnableClick()
     {
         allOpen = false;

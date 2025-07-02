@@ -5,8 +5,9 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
-
-    public string nameIndex = " ";
+    private AudioSource audioSource;
+    public AudioClip explosionSound;
+    bool isBomb = false;
     public int idx = 0;
 
     public GameObject front;
@@ -16,6 +17,10 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer frontImage;
 
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Start()
     {
 
@@ -29,11 +34,17 @@ public class Card : MonoBehaviour
     public void Setting(int number)
     {
         idx = number;
-        string imageFile = teamMembers[idx/3] + "_" + (idx%3+1);
-        //이름 + "_" + 번호 //이름: idx/3 몫 //번호: idx%3 나머지 +1
-        Debug.Log(imageFile);
-        
-        frontImage.sprite = Resources.Load<Sprite>(imageFile);
+        if (idx >= teamMembers.Count * 3) // 팀멤버수*3이상의 인덱스는 폭탄 카드
+        {
+            frontImage.sprite = Resources.Load<Sprite>("bomb");
+            isBomb = true;
+        }
+        else//멤버 카드일 경우
+        {
+            string imageFile = teamMembers[idx / 3] + "_" + (idx % 3 + 1);
+            frontImage.sprite = Resources.Load<Sprite>(imageFile);
+            isBomb = false;
+        }
     }
 
     public void OpenCard()
@@ -41,8 +52,14 @@ public class Card : MonoBehaviour
         animator.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
-
-        if(GameManager.instance.firstCard == null)
+        if (isBomb)//폭탄인지확인
+        {
+            GameManager.instance.DiscountTime(5f); // 시간 감소 처리
+            Debug.Log("폭탄 카드 선택됨! 시간 -5초");
+            audioSource.PlayOneShot(explosionSound);//폭발 사운드 출력
+            Destroy(gameObject,1f);
+        }
+        if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
         }

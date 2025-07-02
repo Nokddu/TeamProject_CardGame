@@ -349,7 +349,6 @@ MonoBehaviour:
   modToggle: {fileID: 452535249}
   Play: {fileID: 292586053}
   Pause: {fileID: 663524022}
-  gameManager: {fileID: 1414256634}
   TitlePanel: {fileID: 1261325269}
   CollectionPanel: {fileID: 1311279784}
 --- !u!4 &291699143
@@ -1492,7 +1491,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

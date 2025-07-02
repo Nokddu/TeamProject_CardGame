@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
         }
     
         //cardIds의 갯수가 필요한 카드 갯수에 도달할때까지 반복
-        while(cardIds.Count < numOfPair * 2)
+        while(cardIds.Count < numOfPair * 2 - 2)//폭탄 2장을위해-2제거
         {
             int randomNumber = Random.Range(0, teamMembers.Count * 3); //멤버마다 이미지 3장
             
@@ -37,11 +37,11 @@ public class Board : MonoBehaviour
                 cardIds.Add(randomNumber);
             }
         }
+        
+        int bombImageId = teamMembers.Count * 3; //폭탄 추가
+        cardIds.Add(bombImageId);
+        cardIds.Add(bombImageId);
 
-        foreach (int ids in cardIds)
-        {
-            Debug.Log(ids);
-        }
 
         cardIds = cardIds.OrderBy(x => Random.value).ToList();
 
