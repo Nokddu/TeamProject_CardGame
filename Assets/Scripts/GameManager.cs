@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     void ScoreMod() // 위와 같음
     {
         StartCoroutine(timeCal(120f));
-        Score = 0;
+        Score = 0; // 지금 갔다와서 해야될거 점수가 둘다 들어감 하나의 모드만 들어가게
     }
 
     private IEnumerator timeCal(float x) // 시간 계산용 코루틴 float x 에 받은 값만큼 세팅된다
@@ -102,8 +102,13 @@ public class GameManager : MonoBehaviour
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
-            Score += 100;
             Invoke(nameof(EnableClick), 1.0f);
+
+            if(_state == TimedOrScore.Score)
+            {
+                Score += 100;
+            }
+
             if (cardCount == -14)
             { // 카드를 모두 찾을시
                 Time.timeScale = 0.0f;
@@ -151,6 +156,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         TimeSet = 0f;
+        PlayerPrefs.SetInt("Score", Score);
         StopAllCoroutines();
     }
 
@@ -158,6 +164,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         TimeSet = 0f;
+        Score = 0;
         StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }
