@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StartButton : MonoBehaviour
 {
     public Toggle bgmToggle; // 토글 값
+    public Toggle modToggle; // 시간 제한 모드
     public GameObject Play; // 음악 켠 상태의 아이콘
     public GameObject Pause; // 음악 멈춘 상태의 아이콘
 
@@ -45,22 +46,18 @@ public class StartButton : MonoBehaviour
         }
     }
 
-    // 시간 제한 모드랑 그냥 모드 구현되면 연결하기
-    public void IsTimed(bool isOn)
+    public void ModToggle()
     {
-        if(isOn)
-        {
-            // 시간 제한 모드
-        }
-        else
-        {
-            // 그냥 모드
-        }
+        bool isScoreMod = modToggle.isOn;
+        GameManager.instance.SetStateToggle(isScoreMod);
+        Debug.Log(GameManager.instance.TimeSet);
     }
+
 
     public void StartBtn() // 메인 씬 이동하는 버튼
     {
         SceneManager.LoadScene("MainScene");
+        GameManager.instance.StartGame();
     }
 
     public void CollectionBtn() // 컬렉션 UI 버튼
