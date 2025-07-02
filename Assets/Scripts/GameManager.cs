@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
     void ScoreMod() // 위와 같음
     {
         StartCoroutine(timeCal(120f));
-        Score = 0; // 지금 갔다와서 해야될거 점수가 둘다 들어감 하나의 모드만 들어가게
     }
 
     private IEnumerator timeCal(float x) // 시간 계산용 코루틴 float x 에 받은 값만큼 세팅된다
@@ -109,15 +108,17 @@ public class GameManager : MonoBehaviour
                 Score += 100;
             }
 
-            if (cardCount == -14)
-            { // 카드를 모두 찾을시
-                Time.timeScale = 0.0f;
-                Invoke("EndButton", 1.0f);
-                UIManager.uiInstance.End();
-                CollectMember();
-                Debug.Log("이겼다. 카드 얻으러가자");
+            if(_state == TimedOrScore.Timed)
+            {
+                if (cardCount == -14)
+                { // 카드를 모두 찾을시
+                    Time.timeScale = 0.0f;
+                    Invoke("EndButton", 1.0f);
+                    UIManager.uiInstance.End();
+                    CollectMember();
+                    Debug.Log("이겼다. 카드 얻으러가자");
+                }
             }
-
         }
         else
         {
@@ -156,7 +157,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         TimeSet = 0f;
-        if(Score > BestScore)
+        cardCount = 0;
+        if (Score > BestScore)
         {
             BestScore = Score;
             PlayerPrefs.SetInt("BestScore", BestScore);
@@ -170,6 +172,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         TimeSet = 0f;
         Score = 0;
+        cardCount = 0;
         StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }
