@@ -5,28 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance; // 싱글톤
 
     public static string gameType = "Normal";
-    public Card firstCard;
+    public Card firstCard; 
     public Card secondCard;
     public bool allOpen = false;
     public int cardCount = 0;
 
-    public float TimeSet { get; private set; }
-    public int Score { get; private set; } 
+    public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
+    public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
     //State 패턴
     public enum TimedOrScore
     {
-        Timed,
-        Score
+        Timed, // 시간안에 다 맞추는 모드 . 아마 Default라고 생각
+        Score // TimeSet 안에 최대한 많이 뒤집는 모드
     }
-    public TimedOrScore _state = TimedOrScore.Timed;
+    private TimedOrScore _state = TimedOrScore.Timed;
 
-    public void SetStateToggle(bool isOn)
+    public void SetStateToggle(bool isOn) // bool 값을 받아서 state 값 조정
     {
-        _state = isOn ? TimedOrScore.Score : TimedOrScore.Timed;
-        Debug.Log(_state);
+        _state = isOn ? TimedOrScore.Score : TimedOrScore.Timed; // state에 대한 람다식 isOn ? True 면 score 모드로 Toggle Check : false면 Timed 모드로 << 현재 default 값이 Timed;
+        Debug.Log(_state); // 현재 스테이트 디버깅용
     }
    
 
@@ -36,14 +36,15 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        else Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
     }
 
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        Time.timeScale = 1f;
-        _state = TimedOrScore.Timed;
+        DontDestroyOnLoad(gameObject); // 게임매니저는 하나밖에 없으니 타이틀에서 넘어가도 안사라지게
+        Time.timeScale = 1f; // 시작할 때 timescale 초기화
+        _state = TimedOrScore.Timed; // state도 시작할 때 timed 로 초기화 << default
     }
 
     void Update()
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartGame() // 함수 실행되면 스테이트에 맞는 함수 실행되게
     {
         switch (_state)
         {
@@ -69,17 +70,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TimedMod()
+    void TimedMod() // Coroutine을 스테이트에 맞는 시간만큼 주고 시작
     {
         StartCoroutine(timeCal(30f));
     }
 
-    void ScoreMod()
+    void ScoreMod() // 위와 같음
     {
         StartCoroutine(timeCal(120f));
     }
 
-    private IEnumerator timeCal(float x)
+    private IEnumerator timeCal(float x) // 시간 계산용 코루틴 float x 에 받은 값만큼 세팅된다
     {
         TimeSet = x;
 
@@ -133,19 +134,19 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void GameEnd()
+    void GameEnd() // 게임이 끝날 시 타임 스케일 변경 : 시간을 멈춤
     {
         Time.timeScale = 0f;
     }
 
-    public void GoTitle()
+    public void GoTitle() // 타이틀로 가게 될시 타임 스케일 다시 1f 시작했던 코루틴들 다 멈추게 하기
     {
         Time.timeScale = 1f;
         StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }
 
-    public void ExitBtn()
+    public void ExitBtn() // 게임 종료
     {
         Application.Quit();
     }

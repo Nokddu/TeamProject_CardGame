@@ -62,17 +62,17 @@ public class UIManager : MonoBehaviour
     //          GameEndTxt.gameObject.SetActive(true);
     //         GameEndTxt.text = "\n��ȸ�� ���� �����Ͽ����ϴ� ��^��";   // ���� �Ŵ������� ������ �����ϴ� ������ ������ �;ߵ�
 
-    public void Retry()
+    public void Retry() // 다시 시작 버튼 
     {
-        GameManager.instance.GoTitle();
+        GameManager.instance.GoTitle();  // 다시 시작 버튼 나오면 게임 매니저에 따로 loadscene 만들 예정
     }
     public void MoveTitle()
     {
-        GameManager.instance.GoTitle();
+        GameManager.instance.GoTitle(); // 타이틀 씬 이동
     }
     public void EndButton() //실제로는 게임 종료되지만 화면상에는 안꺼짐
     {
-        GameManager.instance.ExitBtn();
+        GameManager.instance.ExitBtn(); // 게임 종료 함수 종료는 되는데 아마 지금 안먹음
     }
 }
 
