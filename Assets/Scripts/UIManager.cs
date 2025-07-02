@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
 
 
 
-        if(GameManager.instance.TimeSet < 0f)
+        if(GameManager.instance.TimeSet <= 0f)
         {
             End();
         }
@@ -69,6 +69,7 @@ public class UIManager : MonoBehaviour
     public void MoveTitle()
     {
         GameManager.instance.GoTitle(); // 타이틀 씬 이동
+        Debug.Log("d");
     }
     public void EndButton() //실제로는 게임 종료되지만 화면상에는 안꺼짐
     {
