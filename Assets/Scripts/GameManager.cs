@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
     public bool allOpen = false;
     public int cardCount = 0;
+    public MemberInfoPanel infoPanel;
 
     public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     }
     private TimedOrScore _state = TimedOrScore.Timed;
 
+    List<string> teamMembers = new List<string> { "Yejin", "YongMin", "Younga", "Youngsik" };
+    
     public void SetStateToggle(bool isOn) // bool 값을 받아서 state 값 조정
     {
         _state = isOn ? TimedOrScore.Score : TimedOrScore.Timed; // state에 대한 람다식 isOn ? True 면 score 모드로 Toggle Check : false면 Timed 모드로 << 현재 default 값이 Timed;
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     void TimedMod() // Coroutine을 스테이트에 맞는 시간만큼 주고 시작
     {
-        StartCoroutine(timeCal(30f));
+        StartCoroutine(timeCal(100f));
     }
 
     void ScoreMod() // 위와 같음
@@ -104,6 +107,8 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
                 Invoke("EndButton", 1.0f);
                 UIManager.uiInstance.End();
+                CollectMember();
+                Debug.Log("이겼다. 카드 얻으러가자");
             }
 
         }
@@ -155,6 +160,15 @@ public class GameManager : MonoBehaviour
     public void ExitBtn() // 게임 종료
     {
         Application.Quit();
+    }
+
+    void CollectMember()    //멤버 수집 (중복제외) 수집된 멤버는 List에서 제거하는 방식으로 중복 방지함.
+    {
+        int index = Random.Range(0, teamMembers.Count);
+        string memberName = teamMembers[index];
+        teamMembers.RemoveAt(index);
+        infoPanel.CollectOne(memberName);
+        Debug.Log("CollectMember called");
     }
 }
 

@@ -32,9 +32,6 @@ public class Collection : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("비활성화 되었습니다!");
         infoPanel.memberInfo.gameObject.SetActive(false);
-
-        // otherObject.SetActive(false);
     }
 }

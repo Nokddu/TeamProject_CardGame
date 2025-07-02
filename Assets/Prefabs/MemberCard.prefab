@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 0
   memberImage: {fileID: 6288905297168889776}
+  infoPanel: {fileID: 0}
 --- !u!1 &4577560371229831011
 GameObject:
   m_ObjectHideFlags: 0

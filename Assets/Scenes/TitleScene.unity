@@ -2290,7 +2290,7 @@ MonoBehaviour:
   secondCard: {fileID: 0}
   allOpen: 0
   cardCount: 0
-  _state: 0
+  infoPanel: {fileID: 1853438856}
 --- !u!4 &1414256635
 Transform:
   m_ObjectHideFlags: 0
