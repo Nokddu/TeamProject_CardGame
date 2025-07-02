@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     void ScoreMod() // 위와 같음
     {
         StartCoroutine(timeCal(120f));
+        Score = 0;
     }
 
     private IEnumerator timeCal(float x) // 시간 계산용 코루틴 float x 에 받은 값만큼 세팅된다
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;
-
+            Score += 100;
             Invoke(nameof(EnableClick), 1.0f);
             if (cardCount == -14)
             { // 카드를 모두 찾을시
@@ -156,6 +157,8 @@ public class GameManager : MonoBehaviour
     public void GoTitle() // 타이틀로 가게 될시 타임 스케일 다시 1f 시작했던 코루틴들 다 멈추게 하기
     {
         Time.timeScale = 1f;
+        TimeSet = 0f;
+        StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }
 

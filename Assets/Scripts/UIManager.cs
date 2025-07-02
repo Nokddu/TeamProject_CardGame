@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager uiInstance;//다른 스크립트에서 사용하기위함
     public Text Timetxt; // ���� ������ �ð�
+    public Text ScoreTxt;
     public GameObject normalClearEnd; //노말게임 성공시 나오는 사진과 글
     public GameObject normalFailEnd;//노말게임 실패시 나오는 사진과 글
     public GameObject timerGameEnd;//시간 제한모드 게임 종료시 나오는 글
@@ -27,7 +28,7 @@ public class UIManager : MonoBehaviour
         float whitetored = Mathf.Lerp(1f, 0f, t);
         Timetxt.color = new Color(1f, whitetored, whitetored);
         Timetxt.text = GameManager.instance.TimeSet.ToString("N1");
-
+        ScoreTxt.text = GameManager.instance.Score.ToString();
 
 
         if(GameManager.instance.TimeSet <= 0f)
@@ -55,12 +56,7 @@ public class UIManager : MonoBehaviour
             
         }
        }
-    //    (���� ���� < 1���ϸ�)
-    //       
-    //            Time.timeScale = 0;
-    //          EndPanel.SetActive(true);
-    //          GameEndTxt.gameObject.SetActive(true);
-    //         GameEndTxt.text = "\n��ȸ�� ���� �����Ͽ����ϴ� ��^��";   // ���� �Ŵ������� ������ �����ϴ� ������ ������ �;ߵ�
+
 
     public void Retry() // 다시 시작 버튼 
     {
