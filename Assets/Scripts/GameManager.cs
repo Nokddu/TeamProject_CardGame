@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(TimeSet);
         if(TimeSet < 0f)
         {
             GameEnd();
@@ -143,12 +144,13 @@ public class GameManager : MonoBehaviour
     void GameEnd() // 게임이 끝날 시 타임 스케일 변경 : 시간을 멈춤
     {
         Time.timeScale = 0f;
+        TimeSet = 0f;
+        StopAllCoroutines();
     }
 
     public void GoTitle() // 타이틀로 가게 될시 타임 스케일 다시 1f 시작했던 코루틴들 다 멈추게 하기
     {
         Time.timeScale = 1f;
-        StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }
 
