@@ -23,7 +23,7 @@ public class Card : MonoBehaviour
     }
     void Start()
     {
-
+        GameManager.instance.allCards.Add(this);
     }
 
     void Update()
@@ -69,7 +69,19 @@ public class Card : MonoBehaviour
             GameManager.instance.isMatched();
         }
     }
+    public void ShowCardFace()//카드 앞면 보여주기
+    {
+        animator.SetBool("isOpen", true);
+        front.SetActive(true);
+        back.SetActive(false);
+    }
 
+    public void HideCardFace()//카드 뒷면 보여주기
+    {
+        animator.SetBool("isOpen", false);
+        front.SetActive(false);
+        back.SetActive(true);
+    }
     public void DestroyCard()
     {
         Invoke("DestoryCardInvoke", 1.0f);

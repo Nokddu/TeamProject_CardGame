@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int cardCount = 0;
     public MemberInfoPanel infoPanel;
 
+    public List<Card> allCards = new List<Card>();//전체 카드 리스트
     public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
     public int BestScore { get; private set; }
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         Timed, // 시간안에 다 맞추는 모드 . 아마 Default라고 생각
         Score // TimeSet 안에 최대한 많이 뒤집는 모드
     }
+
     public TimedOrScore _state = TimedOrScore.Timed;
 
     List<string> teamMembers = new List<string> { "Yejin", "YongMin", "Younga", "Youngsik" };
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // 게임매니저는 하나밖에 없으니 타이틀에서 넘어가도 안사라지게
         Time.timeScale = 1f; // 시작할 때 timescale 초기화
         _state = TimedOrScore.Timed; // state도 시작할 때 timed 로 초기화 << default
+
+        StartCoroutine(DelayAndShowAllCards());
     }
 
     void Update()
@@ -92,7 +96,11 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
-
+    IEnumerator DelayAndShowAllCards() // 카드가 모두 생성될 시간 확보하는 함수
+    {
+        yield return new WaitForSeconds(1.0f);
+        ShowAllCardsOnce();
+    }
     public void isMatched()
     {
         allOpen = true;
@@ -152,7 +160,32 @@ public class GameManager : MonoBehaviour
         allOpen = false;
     }
 
+    public void ShowAllCardsOnce()
+    {
+        StartCoroutine(ShowAllCardsCoroutine());
+    }
 
+    IEnumerator ShowAllCardsCoroutine()
+    {
+        allOpen = true; //활성화 되어있는 동안 플레이어가 카드 클릭 못하도록함
+
+        // 모든 카드 앞면 표시
+        foreach (Card card in allCards)
+        {
+            card.ShowCardFace();
+        }
+
+        // n초 보여주기
+        yield return new WaitForSeconds(2f);
+
+        // 모든 카드 닫기
+        foreach (Card card in allCards)
+        {
+            card.HideCardFace();
+        }
+
+        allOpen = false;
+    }
     void GameEnd() // 게임이 끝날 시 타임 스케일 변경 : 시간을 멈춤
     {
         Time.timeScale = 0f;
