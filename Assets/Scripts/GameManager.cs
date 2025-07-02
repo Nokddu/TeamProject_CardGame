@@ -6,12 +6,29 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
+
     public static string gameType = "Normal";
     public Card firstCard;
     public Card secondCard;
     public bool allOpen = false;
     public int cardCount = 0;
+
+    public float TimeSet { get; private set; }
+    public int Score { get; private set; } 
+    //State 패턴
+    public enum TimedOrScore
+    {
+        Timed,
+        Score
+    }
+    public TimedOrScore _state = TimedOrScore.Timed;
+
+    public void SetStateToggle(bool isOn)
+    {
+        _state = isOn ? TimedOrScore.Score : TimedOrScore.Timed;
+        Debug.Log(_state);
+    }
+   
 
     private void Awake()
     {
@@ -20,18 +37,57 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-    // Start is called before the first frame update
+
+
     void Start()
     {
-
+        DontDestroyOnLoad(gameObject);
+        Time.timeScale = 1f;
+        _state = TimedOrScore.Timed;
     }
 
-    // Update is called once per frame
     void Update()
-
     {
+        Debug.Log(TimeSet);
 
+        if(TimeSet < 0f)
+        {
+            GameEnd();
+        }
+    }
 
+    public void StartGame()
+    {
+        switch (_state)
+        {
+            case TimedOrScore.Timed:
+                TimedMod();// 시간안에 모든 카드 뒤집기
+                break;
+            case TimedOrScore.Score:
+                ScoreMod();// 시간안에 최대한 많은 카드 뒤집기
+                break;
+        }
+    }
+
+    void TimedMod()
+    {
+        StartCoroutine(timeCal(30f));
+    }
+
+    void ScoreMod()
+    {
+        StartCoroutine(timeCal(120f));
+    }
+
+    private IEnumerator timeCal(float x)
+    {
+        TimeSet = x;
+
+        while(TimeSet > 0f)
+        {
+            TimeSet -= Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void isMatched()
@@ -74,6 +130,24 @@ public class GameManager : MonoBehaviour
     void EnableClick()
     {
         allOpen = false;
+    }
+
+
+    void GameEnd()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void GoTitle()
+    {
+        Time.timeScale = 1f;
+        StopAllCoroutines();
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void ExitBtn()
+    {
+        Application.Quit();
     }
 }
 

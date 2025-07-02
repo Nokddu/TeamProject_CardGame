@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject normalFailEnd;//노말게임 실패시 나오는 사진과 글
     public GameObject timerGameEnd;//시간 제한모드 게임 종료시 나오는 글
     public GameObject EndPanel; // ������ ������ ������ �ǳ�
-    private float time = 30f;
     private float Timer = 0f;
     void Start()
     {
@@ -22,28 +21,27 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
+
         Timer += Time.deltaTime;
-        float t = Mathf.Clamp01(Timer / time);
+        float t = Mathf.Clamp01(Timer / GameManager.instance.TimeSet);
         float whitetored = Mathf.Lerp(1f, 0f, t);
         Timetxt.color = new Color(1f, whitetored, whitetored);
-        Timetxt.text = time.ToString("N1");
+        Timetxt.text = GameManager.instance.TimeSet.ToString("N1");
 
 
 
-        if(time < 0f)
+        if(GameManager.instance.TimeSet < 0f)
         {
-           End();
+            End();
         }
     }
 
     public void End()
     {
-        Time.timeScale = 0;
         EndPanel.SetActive(true);
         if (GameManager.gameType == "Normal") //게임타입이 일반게임인경우
         {
-            if (time > 0)
+            if (GameManager.instance.TimeSet > 0)
             {
                 normalClearEnd.gameObject.SetActive(true);
             }
@@ -66,16 +64,15 @@ public class UIManager : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("MainScene");
+        GameManager.instance.GoTitle();
     }
     public void MoveTitle()
     {
-        SceneManager.LoadScene("TitleScene");
+        GameManager.instance.GoTitle();
     }
     public void EndButton() //실제로는 게임 종료되지만 화면상에는 안꺼짐
     {
-        Debug.Log("게임 종료");
-        Application.Quit();
+        GameManager.instance.ExitBtn();
     }
 }
 
