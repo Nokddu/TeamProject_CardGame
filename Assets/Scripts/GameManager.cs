@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
+    public int BestScore { get; private set; }
     //State 패턴
     public enum TimedOrScore
     {
@@ -156,7 +157,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         TimeSet = 0f;
-        PlayerPrefs.SetInt("Score", Score);
+        if(Score > BestScore)
+        {
+            BestScore = Score;
+            PlayerPrefs.SetInt("BestScore", BestScore);
+            PlayerPrefs.Save();
+        }
         StopAllCoroutines();
     }
 
