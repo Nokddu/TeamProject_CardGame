@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
         normalClearEnd.gameObject.SetActive(false);
         normalFailEnd.gameObject.SetActive(false);
         timerGameEnd.gameObject.SetActive(false);
+        resultShown = false;
     }
 
     // Update is called once per frame
@@ -39,7 +40,6 @@ public class UIManager : MonoBehaviour
         Timetxt.color = new Color(1f, whitetored, whitetored);
         Timetxt.text = GameManager.instance.TimeSet.ToString("N1");
         ScoreTxt.text = GameManager.instance.Score.ToString();
-
 
         if(GameManager.instance.TimeSet <= 0f)
         {
