@@ -10,13 +10,13 @@ public class Board : MonoBehaviour
 
     Transform cards;
     public GameObject card;
-    
-    
+    int numOfPair = 8;
+    List<int> cardIds = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
-        int numOfPair = 8; //확장성 고려: 8이랑 10으로 넣었을 때 화면에 딱 맞음.
-        List<int> cardIds = new List<int>();
+         //확장성 고려: 8이랑 10으로 넣었을 때 화면에 딱 맞음.
+        
 
         //각 멤버들의 1번 이미지를 1 Pair 넣어줌.
         for (int i = 0; i < teamMembers.Count; i++)
@@ -42,7 +42,6 @@ public class Board : MonoBehaviour
         cardIds.Add(bombImageId);
         cardIds.Add(bombImageId);
 
-
         cardIds = cardIds.OrderBy(x => Random.value).ToList();
 
         for (int i = 0; i < numOfPair*2; i++)
@@ -59,6 +58,6 @@ public class Board : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

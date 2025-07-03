@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);// 게임매니저는 하나밖에 없으니 타이틀에서 넘어가도 안사라지게
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
     }
@@ -47,10 +50,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject); // 게임매니저는 하나밖에 없으니 타이틀에서 넘어가도 안사라지게
+         
         Time.timeScale = 1f; // 시작할 때 timescale 초기화
         _state = TimedOrScore.Timed; // state도 시작할 때 timed 로 초기화 << default
-
         StartCoroutine(DelayAndShowAllCards());
     }
 
@@ -114,6 +116,15 @@ public class GameManager : MonoBehaviour
             if(_state == TimedOrScore.Score)
             {
                 Score += 100;
+                if(cardCount == -14)
+                {
+                    cardCount = 0;
+                    foreach(Card card in allCards)
+                    {
+                        card.gameObject.SetActive(true);
+                        card.CloseCardInvoke();
+                    }
+                }
             }
 
             if(_state == TimedOrScore.Timed)
@@ -222,6 +233,16 @@ public class GameManager : MonoBehaviour
         teamMembers.RemoveAt(index);
         infoPanel.CollectOne(memberName);
         Debug.Log("CollectMember called");
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        allCards.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
 

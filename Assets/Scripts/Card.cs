@@ -22,8 +22,10 @@ public class Card : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
     void Start()
-    {
-        GameManager.instance.allCards.Add(this);
+    {   if(!GameManager.instance.allCards.Contains(this))
+        {
+            GameManager.instance.allCards.Add(this);
+        }
     }
 
     void Update()
@@ -57,11 +59,16 @@ public class Card : MonoBehaviour
             GameManager.instance.DiscountTime(5f); // 시간 감소 처리
             Debug.Log("폭탄 카드 선택됨! 시간 -5초");
             audioSource.PlayOneShot(explosionSound);//폭발 사운드 출력
-            Destroy(gameObject,1f);
+            DestoryCardInvoke();
         }
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
+            if(isBomb)
+            {
+                GameManager.instance.firstCard = null;
+                isBomb = false;
+            }
         }
         else
         {
@@ -88,17 +95,18 @@ public class Card : MonoBehaviour
     }
     void DestoryCardInvoke()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     public void CloseCard()
     {
         Invoke("CloseCardInvoke", 1.0f);
     }
-    void CloseCardInvoke()
+    public void CloseCardInvoke()
     {
         animator.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+        isBomb = false;
     }
     public void BeforeCheck()
     {
