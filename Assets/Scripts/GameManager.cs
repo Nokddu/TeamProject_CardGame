@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // 싱글톤
 
-    
     public static string gameType = "Normal";
     public Card firstCard; 
     public Card secondCard;
@@ -19,6 +18,9 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
 
     public int BestScore { get; private set; }
+
+    public static List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
+
 
     //State 패턴
     public enum TimedOrScore
