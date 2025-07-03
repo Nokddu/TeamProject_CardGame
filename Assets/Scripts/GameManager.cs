@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public AudioClip matchSound;
 
     public static List<string> teamMembers = new List<string> { "YongMin", "Younga", "Youngsik" };
-    public static List<string> collectedCards = new List<string>() { }; //수집된 멤버들 add 될 예정.
+    public static List<string> collectedCards = new List<string>() {  }; //수집된 멤버들 add 될 예정.
 
     private Text clearMsg;
     private Image clearImage;
