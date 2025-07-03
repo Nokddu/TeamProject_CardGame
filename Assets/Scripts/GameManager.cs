@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f; // 시작할 때 timescale 초기화
         _state = TimedOrScore.Timed; // state도 시작할 때 timed 로 초기화 << default
 
-        StartCoroutine(DelayAndShowAllCards());
     }
 
     void Update()
