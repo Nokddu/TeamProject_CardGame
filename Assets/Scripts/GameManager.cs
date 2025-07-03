@@ -119,10 +119,10 @@ public class GameManager : MonoBehaviour
                 if(cardCount == -14)
                 {
                     cardCount = 0;
-                    foreach(Card card in allCards)
+                    foreach (Card cards in allCards)
                     {
-                        card.gameObject.SetActive(true);
-                        card.CloseCardInvoke();
+                        cards.SetactiveInvoke();
+                        cards.CloseCard();
                     }
                 }
             }
@@ -184,6 +184,7 @@ public class GameManager : MonoBehaviour
         foreach (Card card in allCards)
         {
             card.ShowCardFace();
+            Debug.Log("gdgd");
         }
 
         // n초 보여주기
@@ -244,5 +245,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+
+
 }
 
