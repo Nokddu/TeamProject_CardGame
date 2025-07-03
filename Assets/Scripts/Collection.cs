@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Collection : MonoBehaviour
 {
-    //List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
-    
     public GameObject memberCard;
 
     public MemberInfoPanel infoPanel;

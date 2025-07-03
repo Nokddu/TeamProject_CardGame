@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MemberCard : MonoBehaviour
 {
-    //List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
-
     public int idx = 0;
 
     public SpriteRenderer memberImage;

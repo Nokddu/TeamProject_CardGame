@@ -26,9 +26,6 @@ public class GameManager : MonoBehaviour
     public static List<string> teamMembers = new List<string> { "YongMin", "Younga", "Youngsik" };
     public static List<string> collectedCards = new List<string>() {  }; //수집된 멤버들 add 될 예정.
 
-    //private Text clearMsg;
-    //private Image clearImage;
-
 
     //State 패턴
     public enum TimedOrScore
@@ -236,77 +233,5 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    //void OnSceneLoaded(Scene scene, LoadSceneMode mode) //Scene로드 되었을 때 실행
-    //{
-    //    if (scene.name == "MainScene")
-    //    {
-    //        SetupMainSceneUI();
-    //    }
-    //}
-
-    //private void SetupMainSceneUI() //MainScene에만 있는 오브젝트 참조용.
-    //{
-    //    GameObject textObject = GameObject.Find("ClearMsg");
-    //    if (textObject != null)
-    //    {
-    //        clearMsg = textObject.GetComponent<Text>();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("ClearMsg못찾음");
-    //    }
-
-    //    GameObject imageObject = GameObject.Find("ClearImage");
-    //    if(imageObject != null)
-    //    {
-    //        clearImage = imageObject.GetComponent<Image>();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("ClearImage못찾음");
-    //    }
-    //    Debug.LogWarning("SetupMainSceneUI() is called");
-    //}
-
-    //public void CollectMember()    //멤버 수집 (중복제외) 수집된 멤버는 List에서 제거하는 방식으로 중복 방지함.
-    //{
-    //    if (SceneManager.GetActiveScene().name == "MainScene")
-    //    {
-    //        if (collectedCards.Count != teamMembers.Count) //다 못 모았을 때
-    //        {
-    //            bool isCollected = false;
-    //            string memberName;
-
-    //            do 
-    //            {
-    //                int index = Random.Range(0, teamMembers.Count);
-    //                memberName = teamMembers[index];
-    //                isCollected = collectedCards.Contains(memberName);
-    //            } while (isCollected); //중복 체크
-
-    //            collectedCards.Add(memberName);
-
-    //            if (clearMsg == null || clearImage == null)
-    //            {
-    //                Debug.LogWarning("CollectMember(): UI가 아직 설정되지 않았습니다.");
-    //                SetupMainSceneUI();
-    //            }
-    //            clearMsg.text = memberName + "을 획득했다!";
-    //            clearImage.sprite = Resources.Load<Sprite>(memberName + "_" + 1);
-    //            Debug.Log("CollectMember called");
-    //        }
-    //        else if(collectedCards.Count == teamMembers.Count) //다 모았을 때
-    //        {
-    //            if (clearMsg == null || clearImage == null)
-    //            {
-    //                Debug.LogWarning("CollectMember(): UI가 아직 설정되지 않았습니다.");
-    //                SetupMainSceneUI();
-    //            }
-    //            clearMsg.text = "이미 모두 획득했다!";
-    //            clearImage.sprite = Resources.Load<Sprite>("cryingcat");
-    //        }
-    //    }
-    //}
 }
 
