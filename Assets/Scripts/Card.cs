@@ -53,7 +53,10 @@ public class Card : MonoBehaviour
         animator.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
+<<<<<<< Updated upstream
         audioSource.PlayOneShot(flipSound);
+=======
+>>>>>>> Stashed changes
         if (isBomb)//폭탄인지확인
         {
             GameManager.instance.DiscountTime(5f); // 시간 감소 처리
@@ -64,6 +67,14 @@ public class Card : MonoBehaviour
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
+<<<<<<< Updated upstream
+=======
+            if(isBomb)
+            {
+                GameManager.instance.firstCard = null;
+                isBomb = false;
+            }
+>>>>>>> Stashed changes
         }
         else
         {
@@ -101,6 +112,7 @@ public class Card : MonoBehaviour
         animator.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+        isBomb = false;
     }
     public void BeforeCheck()
     {
