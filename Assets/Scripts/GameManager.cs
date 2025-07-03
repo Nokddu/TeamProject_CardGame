@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
 
     public int BestScore { get; private set; }
 
-    public static List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
+
     private AudioSource audioSource;
     public AudioClip matchSound;
+
+    public static List<string> teamMembers = new List<string> { "YongMin", "Younga", "Youngsik" };
+    public static List<string> collectedCards = new List<string>() { "YongMin", "Younga", "Youngsik" }; //수집된 멤버들 add 될 예정.
+
     private Text clearMsg;
     private Image clearImage;
 
@@ -36,8 +40,6 @@ public class GameManager : MonoBehaviour
 
     public TimedOrScore _state = TimedOrScore.Timed;
 
-    List<string> teamMembers = new List<string> { "Yejin", "YongMin", "Younga", "Youngsik" };
-    
     public void SetStateToggle(bool isOn) // bool 값을 받아서 state 값 조정
     {
         _state = isOn ? TimedOrScore.Score : TimedOrScore.Timed; // state에 대한 람다식 isOn ? True 면 score 모드로 Toggle Check : false면 Timed 모드로 << 현재 default 값이 Timed;
@@ -259,26 +261,42 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("ClearImage못찾음");
         }
+        Debug.LogWarning("SetupMainSceneUI() is called");
     }
 
     void CollectMember()    //멤버 수집 (중복제외) 수집된 멤버는 List에서 제거하는 방식으로 중복 방지함.
     {
         if (SceneManager.GetActiveScene().name == "MainScene")
         {
-            int index = Random.Range(0, teamMembers.Count);
-            string memberName = teamMembers[index];
-            teamMembers.RemoveAt(index);
-            collectedCards.Add(memberName);
-
             if (clearMsg == null || clearImage == null)
             {
                 Debug.LogWarning("CollectMember(): UI가 아직 설정되지 않았습니다.");
                 SetupMainSceneUI();
             }
 
-            clearMsg.text = memberName + "을 획득했다!";
-            clearImage.sprite = Resources.Load<Sprite>(memberName + "_" + 1);
-            Debug.Log("CollectMember called");
+            if (collectedCards.Count != teamMembers.Count) //다 못 모았을 때
+            {
+                bool isCollected = false;
+                string memberName;
+
+                do 
+                {
+                    int index = Random.Range(0, teamMembers.Count);
+                    memberName = teamMembers[index];
+                    isCollected = collectedCards.Contains(memberName);
+                } while (isCollected); //중복 체크
+
+                collectedCards.Add(memberName);
+
+                clearMsg.text = memberName + "을 획득했다!";
+                clearImage.sprite = Resources.Load<Sprite>(memberName + "_" + 1);
+                Debug.Log("CollectMember called");
+            }
+            else if(collectedCards.Count == teamMembers.Count) //다 모았을 때
+            {
+                clearMsg.text = "이미 모두 획득했다!";
+                clearImage.sprite = Resources.Load<Sprite>("cryingcat");
+            }
         }
     }
 }
