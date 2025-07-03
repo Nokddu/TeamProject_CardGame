@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSound: {fileID: 8300000, guid: 4f6bd603192d0174994bdbb56ee24d66, type: 3}
+  flipSound: {fileID: 8300000, guid: 5fb4531b128f56f45ac63e789bf42bea, type: 3}
   idx: 0
   front: {fileID: 1052758616061654610}
   back: {fileID: 6447960653444024007}

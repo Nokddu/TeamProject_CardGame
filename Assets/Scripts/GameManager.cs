@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     public int BestScore { get; private set; }
 
     public static List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
-
-
+    private AudioSource audioSource;
+    public AudioClip matchSound;
     private Text clearMsg;
     private Image clearImage;
 
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         if (instance == null)
         {
             instance = this;
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
         allOpen = true;
         if (firstCard.idx == secondCard.idx)
         {
+            audioSource.PlayOneShot(matchSound);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;

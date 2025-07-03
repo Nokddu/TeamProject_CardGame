@@ -7,6 +7,7 @@ public class Card : MonoBehaviour
     List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
     private AudioSource audioSource;
     public AudioClip explosionSound;
+    public AudioClip flipSound;
     bool isBomb = false;
     public int idx = 0;
 
@@ -52,12 +53,13 @@ public class Card : MonoBehaviour
         animator.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
+        audioSource.PlayOneShot(flipSound);
         if (isBomb)//폭탄인지확인
         {
             GameManager.instance.DiscountTime(5f); // 시간 감소 처리
             Debug.Log("폭탄 카드 선택됨! 시간 -5초");
             audioSource.PlayOneShot(explosionSound);//폭발 사운드 출력
-            Destroy(gameObject,1f);
+            Destroy(gameObject, 1f);
         }
         if (GameManager.instance.firstCard == null)
         {
