@@ -1067,7 +1067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452535248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2355,7 +2355,7 @@ MonoBehaviour:
   allOpen: 0
   cardCount: 0
   allCards: []
-  matchSound: {fileID: 0}
+  matchSound: {fileID: 8300000, guid: 4ca918953889a4641b2e0ef99fef38a5, type: 3}
   _state: 0
 --- !u!4 &1414256635
 Transform:

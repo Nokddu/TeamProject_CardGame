@@ -176,6 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d69b8c90a1c97469cda3f9a2ddc627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmToggle: {fileID: 0}
+  modToggle: {fileID: 0}
+  Play: {fileID: 0}
+  Pause: {fileID: 0}
+  TitlePanel: {fileID: 0}
+  CollectionPanel: {fileID: 0}
 --- !u!114 &292456653
 MonoBehaviour:
   m_ObjectHideFlags: 0
