@@ -129,18 +129,6 @@ public class GameManager : MonoBehaviour
             if(_state == TimedOrScore.Score)
             {
                 Score += 100;
-<<<<<<< Updated upstream
-=======
-                if(cardCount == -14)
-                {
-                    cardCount = 0;
-                    foreach(Card card in allCards)
-                    {
-                        card.gameObject.SetActive(true);
-                        card.CloseCardInvoke();
-                    }
-                }
->>>>>>> Stashed changes
             }
 
             if(_state == TimedOrScore.Timed)
@@ -293,18 +281,5 @@ public class GameManager : MonoBehaviour
             Debug.Log("CollectMember called");
         }
     }
-<<<<<<< Updated upstream
-=======
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        allCards.Clear();
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
->>>>>>> Stashed changes
 }
 
