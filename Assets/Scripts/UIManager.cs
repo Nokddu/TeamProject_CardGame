@@ -44,11 +44,11 @@ public class UIManager : MonoBehaviour
             End();
         }
     }
+    // public void End()
+    // {
+    //     Invoke("InvokeEnd", 1.0f);
+    // }
     public void End()
-    {
-        Invoke("InvokeEnd", 1.0f);
-    }
-    public void InvokeEnd()
     {
         EndPanel.SetActive(true);
         if ( GameManager.instance._state == GameManager.TimedOrScore.Timed) //게임타입이 일반게임인경우

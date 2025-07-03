@@ -81,9 +81,11 @@ public class GameManager : MonoBehaviour
         {
             case TimedOrScore.Timed:
                 TimedMod();// 시간안에 모든 카드 뒤집기
+                StartCoroutine(DelayAndShowAllCards());
                 break;
             case TimedOrScore.Score:
                 ScoreMod();// 시간안에 최대한 많은 카드 뒤집기
+                StartCoroutine(DelayAndShowAllCards());
                 break;
         }
     }
@@ -191,7 +193,8 @@ public class GameManager : MonoBehaviour
         // 모든 카드 앞면 표시
         foreach (Card card in allCards)
         {
-            card.ShowCardFace();
+            if (card != null)
+                card.ShowCardFace();
         }
 
         // n초 보여주기
@@ -200,7 +203,8 @@ public class GameManager : MonoBehaviour
         // 모든 카드 닫기
         foreach (Card card in allCards)
         {
-            card.HideCardFace();
+            if (card != null)
+                card.HideCardFace();
         }
 
         allOpen = false;
