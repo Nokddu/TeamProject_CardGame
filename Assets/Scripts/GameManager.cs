@@ -7,16 +7,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // 싱글톤
 
+    
+    public static string gameType = "Normal";
     public Card firstCard; 
     public Card secondCard;
     public bool allOpen = false;
     public int cardCount = 0;
-    public MemberInfoPanel infoPanel;
 
     public List<Card> allCards = new List<Card>();//전체 카드 리스트
     public float TimeSet { get; private set; } // timeset 변수에 관한 get set 정보 받아오기만 가능하게 실직적 값 변환은 gamemanager에서
     public int Score { get; private set; }  // 위와 같음 score 모드 만들어지면 스테이트에 추가할 예정
+
     public int BestScore { get; private set; }
+
     //State 패턴
     public enum TimedOrScore
     {
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log(TimeSet);
+        //Debug.Log(TimeSet);
         if(TimeSet < 0f)
         {
             GameEnd();
@@ -220,7 +223,7 @@ public class GameManager : MonoBehaviour
         int index = Random.Range(0, teamMembers.Count);
         string memberName = teamMembers[index];
         teamMembers.RemoveAt(index);
-        infoPanel.CollectOne(memberName);
+        collectedCards.Add(memberName);
         Debug.Log("CollectMember called");
     }
 }
