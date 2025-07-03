@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     void TimedMod() // Coroutine을 스테이트에 맞는 시간만큼 주고 시작
     {
-        StartCoroutine(timeCal(10f));
+        StartCoroutine(timeCal(100f));
     }
 
     void ScoreMod() // 위와 같음
@@ -228,6 +228,7 @@ public class GameManager : MonoBehaviour
         TimeSet = 0f;
         Score = 0;
         cardCount = 0;
+
         StopAllCoroutines();
         SceneManager.LoadScene("TitleScene");
     }

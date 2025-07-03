@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private Text clearMsg;
     private Image clearImage;
 
+    private bool resultShown = false;
+
     void Start()
     {
         Timetxt.gameObject.GetComponent<Text>();
@@ -44,12 +46,11 @@ public class UIManager : MonoBehaviour
             End();
         }
     }
-    // public void End()
-    // {
-    //     Invoke("InvokeEnd", 1.0f);
-    // }
+
     public void End()
     {
+        if (resultShown) return;
+
         EndPanel.SetActive(true);
         if ( GameManager.instance._state == GameManager.TimedOrScore.Timed) //게임타입이 일반게임인경우
         {
@@ -58,7 +59,7 @@ public class UIManager : MonoBehaviour
                 normalClearEnd.gameObject.SetActive(true);
                 CollectMember();
             }
-            else
+            else if(GameManager.instance.TimeSet <= 0)
             {
                 normalFailEnd.gameObject.SetActive(true);
             }
@@ -67,6 +68,7 @@ public class UIManager : MonoBehaviour
         {
             timerGameEnd.gameObject.SetActive(true);
         }
+        resultShown = true; //결과 보여줬다고 표시
     }
 
 
