@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // 싱글톤
-
+    
     public static string gameType = "Normal";
     public Card firstCard; 
     public Card secondCard;
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
     public int BestScore { get; private set; }
 
     public static List<string> collectedCards = new List<string>(); //수집된 멤버들 add 될 예정.
+
+
+    private Text clearMsg;
+    private Image clearImage;
 
 
     //State 패턴
@@ -46,7 +51,10 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-        else Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
+        else
+        {
+            Destroy(gameObject);  // 혹시 모를 게임매니저 복제 대응
+        }
     }
 
 
@@ -220,13 +228,56 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) //Scene로드 되었을 때 실행
+    {
+        if (scene.name == "MainScene")
+        {
+            SetupMainSceneUI();
+        }
+    }
+
+    private void SetupMainSceneUI() //MainScene에만 있는 오브젝트 참조용.
+    {
+        GameObject textObject = GameObject.Find("ClearMsg");
+        if (textObject != null)
+        {
+            clearMsg = textObject.GetComponent<Text>();
+        }
+        else
+        {
+            Debug.Log("ClearMsg못찾음");
+        }
+
+        GameObject imageObject = GameObject.Find("ClearImage");
+        if(imageObject != null)
+        {
+            clearImage = imageObject.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("ClearImage못찾음");
+        }
+    }
+
     void CollectMember()    //멤버 수집 (중복제외) 수집된 멤버는 List에서 제거하는 방식으로 중복 방지함.
     {
-        int index = Random.Range(0, teamMembers.Count);
-        string memberName = teamMembers[index];
-        teamMembers.RemoveAt(index);
-        collectedCards.Add(memberName);
-        Debug.Log("CollectMember called");
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            int index = Random.Range(0, teamMembers.Count);
+            string memberName = teamMembers[index];
+            teamMembers.RemoveAt(index);
+            collectedCards.Add(memberName);
+
+            if (clearMsg == null || clearImage == null)
+            {
+                Debug.LogWarning("CollectMember(): UI가 아직 설정되지 않았습니다.");
+                SetupMainSceneUI();
+            }
+
+            clearMsg.text = memberName + "을 획득했다!";
+            clearImage.sprite = Resources.Load<Sprite>(memberName + "_" + 1);
+            Debug.Log("CollectMember called");
+        }
     }
 }
 
