@@ -8,7 +8,7 @@ public class Card : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip explosionSound;
     public AudioClip flipSound;
-    bool isBomb = false;
+    public bool isBomb = false;
     public int idx = 0;
 
     public GameObject front;

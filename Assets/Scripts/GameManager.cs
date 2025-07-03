@@ -121,6 +121,11 @@ public class GameManager : MonoBehaviour
         allOpen = true;
         if (firstCard.idx == secondCard.idx)
         {
+            if (firstCard.isBomb && secondCard.isBomb)//폭탄 두개를 고를경우 처리안함
+            {
+                Invoke(nameof(EnableClick), 1.0f);
+                return;
+            }
             audioSource.PlayOneShot(matchSound);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
@@ -136,8 +141,7 @@ public class GameManager : MonoBehaviour
             {
                 if (cardCount == -14)
                 { // 카드를 모두 찾을시
-                    Time.timeScale = 0.0f;
-                    Invoke("EndButton", 1.0f);
+                    Invoke("WaitSec", 1.0f);
                     UIManager.uiInstance.End();
                     CollectMember();
                     Debug.Log("이겼다. 카드 얻으러가자");
@@ -161,6 +165,9 @@ public class GameManager : MonoBehaviour
 
 
 
+    }
+    public void WaitSec(){
+        Time.timeScale = 0.0f;
     }
     public void DiscountTime(float seconds)
     {
