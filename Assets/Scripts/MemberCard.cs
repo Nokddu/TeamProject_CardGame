@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MemberCard : MonoBehaviour
 {
-    List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
+    //List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
 
     public int idx = 0;
 
@@ -26,12 +26,12 @@ public class MemberCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(infoPanel.selectedMemberId != this.idx)
+        if (infoPanel.selectedMemberId != this.idx)
         {
             GetComponent<SpriteRenderer>().color = Color.black;
             isSelected = false;
         }
-        else if(infoPanel.selectedMemberId == -1)
+        else if (infoPanel.selectedMemberId == -1)
         {
             infoPanel.memberInfo.gameObject.SetActive(false);
             isSelected = false;
@@ -42,7 +42,7 @@ public class MemberCard : MonoBehaviour
     {
         idx = number;
         
-        memberImage.sprite = Resources.Load<Sprite>(teamMembers[idx]+"_"+1);
+        memberImage.sprite = Resources.Load<Sprite>(GameManager.collectedCards[idx]+"_"+1);
 
         Debug.Log(idx+"생성됨");
     }
@@ -51,22 +51,21 @@ public class MemberCard : MonoBehaviour
     {
         if(isSelected)
         {
-            Debug.Log(teamMembers[this.idx]+"선택또함!");
+            Debug.Log(GameManager.collectedCards[this.idx]+"선택또함!");
             
             GetComponent<SpriteRenderer>().color = Color.black;
             infoPanel.memberInfo.gameObject.SetActive(false);
-            isSelected = false;
-
+            this.isSelected = false;
 
         }
         else
         {
-            Debug.Log(teamMembers[this.idx]+"선택함!");
+            Debug.Log(GameManager.collectedCards[this.idx]+"선택함!");
 
             GetComponent<SpriteRenderer>().color = Color.white;
             infoPanel.UpdateInfo(this.idx);
             infoPanel.memberInfo.gameObject.SetActive(true);
-            isSelected = true;
+            this.isSelected = true;
         }
     }
 }
