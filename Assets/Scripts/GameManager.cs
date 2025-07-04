@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     void TimedMod() // Coroutine을 스테이트에 맞는 시간만큼 주고 시작
     {
-        StartCoroutine(timeCal(100f));
+        StartCoroutine(timeCal(30f));
     }
 
     void ScoreMod() // 위와 같음
