@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    List<string> teamMembers = new List<string> {"Yejin", "YongMin", "Younga", "Youngsik"};
     private AudioSource audioSource;
     public AudioClip explosionSound;
     public AudioClip flipSound;
@@ -17,6 +16,8 @@ public class Card : MonoBehaviour
     public Animator animator;
 
     public SpriteRenderer frontImage;
+
+    private int numberOfImage = 4;
 
     void Awake()
     {
@@ -35,14 +36,14 @@ public class Card : MonoBehaviour
     public void Setting(int number)
     {
         idx = number;
-        if (idx >= teamMembers.Count * 3) // 팀멤버수*3이상의 인덱스는 폭탄 카드
+        if (idx >= GameManager.teamMembers.Count * numberOfImage) // 팀멤버수*3이상의 인덱스는 폭탄 카드 //4로 변경하면서 변수로 선언함.
         {
             frontImage.sprite = Resources.Load<Sprite>("bomb");
             isBomb = true;
         }
         else//멤버 카드일 경우
         {
-            string imageFile = teamMembers[idx / 3] + "_" + (idx % 3 + 1);
+            string imageFile = GameManager.teamMembers[idx / numberOfImage] + "_" + (idx % numberOfImage + 1);
             frontImage.sprite = Resources.Load<Sprite>(imageFile);
             isBomb = false;
         }

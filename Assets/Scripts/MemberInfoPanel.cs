@@ -8,10 +8,9 @@ public class MemberInfoPanel : MonoBehaviour
     public int selectedMemberId = -1;
 
     Dictionary<string, string> memberDescriptions = new Dictionary<string, string> {
-        { "Yejin", "안녕하세요/예진" },
-        { "YongMin", "안녕하세요/용민" },
-        { "Younga", "안녕하세요/영아" },
-        { "Youngsik", "안녕하세요/영식" }
+        { "YongMin", "좋아하는게임\n할로우나이트" },
+        { "Younga", "좋아하는게임\n팩토리오" },
+        { "Youngsik", "좋아하는게임\n다크소울, 롤" }
     };
 
     public Text nameText;
