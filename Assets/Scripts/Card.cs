@@ -105,6 +105,7 @@ public class Card : MonoBehaviour
     public void BeforeCheck()
     {
         if (GameManager.instance.allOpen) return;
+        if (Time.timeScale == 0f) return;
         OpenCard();
     }
 }
