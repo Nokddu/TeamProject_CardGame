@@ -36,7 +36,7 @@ public class Card : MonoBehaviour
     public void Setting(int number)
     {
         idx = number;
-        if (idx >= GameManager.teamMembers.Count * numberOfImage) // 팀멤버수*3이상의 인덱스는 폭탄 카드 //4로 변경하면서 변수로 선언함.
+        if (idx >= GameManager.teamMembers.Count * numberOfImage) // 팀멤버수*4이상의 인덱스는 폭탄 카드 
         {
             frontImage.sprite = Resources.Load<Sprite>("bomb");
             isBomb = true;
